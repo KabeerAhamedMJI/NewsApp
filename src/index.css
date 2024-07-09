@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.Header {
+  height: 75px;
+  background-color: #ffffff;
+  box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 15px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.Header img {
+  width: 125px;
+  height: auto;
+}
+
+nav {
+  width: fit-content;
+  height: 75px;
+  padding: 10px;
+  background-color: #3778c2;
+
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 50px;
+}
+
+ul li {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 400;
+}
+
+#SearchBar {
+  display: none;
+}
+
+.container {
+  max-width: 1250px;
+}
+
+.material-symbols-outlined {
+  font-size: 35px;
+  color: #3778c2;
+}
+
+.trending-box {
+  background-color: #3778c2;
+  color: #ffff;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: fit-content;
+  font-size: 16px;
+}
+
+article {
+  position: relative;
+}
+
+.PosIcon {
+  background-color: #3778c2;
+  color: #ffff;
+  padding: 8px 10px;
+  border-radius: 5px;
+  max-width: fit-content;
+  font-size: 13px;
+  position: absolute;
+  top: 57%;
+  left: 17%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  margin: 0;
+}
+
+.Mainh3 {
+  position: absolute;
+  bottom: 20px;
+  left: 36%;
+  transform: translateX(-50%);
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-size: 14px;
+}
+
+.img-fluid {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.Category {
+  background-color: #3778c2;
+  color: #ffff;
+  padding: 8px 10px;
+  border-radius: 5px;
+  max-width: fit-content;
+  font-size: 13px;
+  margin-top: 20px;
+  margin-left: 5px;
+}
+
+.TitleText {
+  font-size: 16px;
+  padding: 5px 8px;
+}
+
+article img {
+  border-radius: 5px;
+}
+
+#ArtImage {
+  width: 130px;
+  height: 120px;
+}
+
+section {
+  margin: 60px 0px;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  #ArtBox2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr
+  }
+
+  .PosIcon {
+    font-size: 20px;
+    top: 72%;
+  }
+
+  .Mainh3 {
+    left: 39%;
+    font-size: 23px;
+  }
+
+}
+
+@media only screen and (min-width: 1200px) {
+  #ArtBox1 {
+    width: 65%;
+  }
+
+  #ArtBox2 {
+    width: 30%;
+  }
+
+  #ArtBox2 {
+    display: grid;
+    grid-template-columns: 1fr
+  }
+
+  #SearchBar {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    border: 1px solid rgb(192, 190, 190);
+    width: auto;
+    max-width: 250px;
+    padding: 8px 10px;
+    border: 0.5px solid #3778c2;
+    border-radius: 5px;
+    margin-right: 50px;
+  }
+
+  #SearchBar input {
+    border: none;
+    width: 100%;
+  }
+
+  #SearchBar span {
+    font-size: 20px;
+  }
+
+  #SearchBar input:focus {
+    outline: none;
+  }
+}

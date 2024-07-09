@@ -1,27 +1,34 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function SubNews(props) {
+    const [articles, setArticles] = useState([]);
+
+    useEffect(() => {
+        async function fetchArticles() {
+            try {
+                const response = await axios.get('http://localhost:3000/articles?category=sports');
+                if (response.data.length > 0) {
+                    setArticles(response.data.slice(0, 3)); 
+                }
+            } catch (error) {
+                console.error('Error fetching articles:', error);
+            }
+        }
+
+        fetchArticles();
+    }, []);
 
     return (
-
         <div className="d-flex flex-column flex-md-row pt-4 pb-4 pl-2 gap-4">
-        <article>
-            <img className="img-fluid" src="/images/placeholder_main.png" alt="" />
-            <h4 className="Category">LIFESTYLE</h4>
-            <h3 className="TitleText">Welcome To The Best Model Winner Contest At Look of the year</h3>
-        </article>
-        <article>
-            <img className="img-fluid" src="/images/placeholder_main.png" alt="" />
-            <h4 className="Category">SPORTS</h4>
-            <h3 className="TitleText">Welcome To The Best Model Winner Contest At Look of the year</h3>
-        </article>
-        <article>
-            <img className="img-fluid" src="/images/placeholder_main.png" alt="" />
-            <h4 className="Category">TRAVELS</h4>
-            <h3 className="TitleText">Welcome To The Best Model Winner Contest At Look of the year</h3>
-        </article>
-    </div>
+            {articles.map((article, index) => (
+                <article key={index}>
+                    <img className="img-fluid" src={article.thumbnail} alt="" />
+                    <h4 className="Category">{article.category.toUpperCase()}</h4>
+                    <h3 className="TitleText">{article.title}</h3>
+                </article>
+            ))}
+        </div>
     );
 }
 

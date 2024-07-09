@@ -1,65 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
+function Technology() {
+    const [articles, setArticles] = useState([]);
 
-function Technology(props) {
+    useEffect(() => {
+        async function fetchArticles() {
+            try {
+                const response = await axios.get('http://localhost:3000/articles?category=technology');
+                if (response.data.length > 1) {
+                    setArticles(response.data.slice(1, 4));
+                }
+            } catch (error) {
+                console.error('Error fetching articles:', error);
+            }
+        }
+
+        fetchArticles();
+    }, []);
 
     return (
-
         <section>
-        <div className="container">
-            <div className="d-flex flex-column flex-xl-row align-items-xl-center pt-1 pb-4 pl-2 gap-2">
-                <h3 className="trending-box">TECHNOLOGY</h3>
-                <span>Welcome To The Best Model Winner Contest...</span>
-            </div>
-            <div className="row row-cols-1 row-cols-md-3 g-4">
-                <div className="col">
-                    <div className="card h-100">
-                        <img src="/images/image_2.jpg" className="card-img-top" alt="..." />
-                        <div className="card-body">
-                        <h5 className="card-title font-medium pb-2">
-                                Welcome To The Best Model Winner Contest At Look of the year
-                            </h5>
-                            <p className="card-text">
-                                This is a wider card with supporting text below as a natural
-                                lead-in to additional content. This content is a little bit
-                                longer.
-                            </p>
-                        </div>
+            <div className="container">
+                {articles.length > 0 && (
+                    <div className="d-flex flex-column flex-xl-row align-items-xl-center pt-1 pb-4 pl-2 gap-2">
+                        <h3 className="trending-box">{articles[0].category.toUpperCase()}</h3>
+                        <span>{articles[0].title}</span>
                     </div>
-                </div>
-                <div className="col">
-                    <div className="card h-100">
-                        <img src="/images/image_2.jpg" className="card-img-top" alt="..." />
-                        <div className="card-body">
-                        <h5 className="card-title font-medium pb-2">
-                                Welcome To The Best Model Winner Contest At Look of the year
-                            </h5>
-                            <p className="card-text">
-                                This card has supporting text below as a natural lead-in to
-                                additional content.
-                            </p>
+                )}
+                <div className="row row-cols-1 row-cols-md-3 g-4">
+                    {articles.map((article) => (
+                        <div className="col" key={article._id}>
+                            <div className="card h-100">
+                                <img src={article.thumbnail} className="card-img-top" alt={article.title} />
+                                <div className="card-body">
+                                    <h5 className="card-title font-medium pb-2">
+                                        {article.title}
+                                    </h5>
+                                    <p className="card-text multiline-ellipsis">
+                                        {article.description[0]}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div className="col">
-                    <div className="card h-100">
-                        <img src="/images/image_2.jpg" className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title font-medium pb-2">
-                                Welcome To The Best Model Winner Contest At Look of the year
-                            </h5>
-                            <p className="card-text">
-                                This is a wider card with supporting text below as a natural
-                                lead-in to additional content. This card has even longer content
-                                than the first to show that equal height action.
-                            </p>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
-        </div>
-    </section>
-
+        </section>
     );
 }
 

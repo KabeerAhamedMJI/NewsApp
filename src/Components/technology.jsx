@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Technology() {
     const [articles, setArticles] = useState([]);
@@ -24,23 +25,30 @@ function Technology() {
             <div className="container">
                 {articles.length > 0 && (
                     <div className="d-flex flex-column flex-xl-row align-items-xl-center pt-1 pb-4 pl-2 gap-2">
-                        <h3 className="trending-box">{articles[0].category.toUpperCase()}</h3>
-                        <span>{articles[0].title}</span>
+                        {articles.length > 0 && (
+                            <>
+                                <h3 className="trending-box">{articles[0].category.toUpperCase()}</h3>
+                                <span className='article-title'>{articles[0].title}</span>
+                            </>
+                        )}
                     </div>
                 )}
                 <div className="row row-cols-1 row-cols-md-3 g-4">
                     {articles.map((article) => (
                         <div className="col" key={article._id}>
                             <div className="card h-100">
-                                <img src={article.thumbnail} className="card-img-top" alt={article.title} />
-                                <div className="card-body">
-                                    <h5 className="card-title font-medium pb-2">
-                                        {article.title}
-                                    </h5>
-                                    <p className="card-text multiline-ellipsis">
-                                        {article.description[0]}
-                                    </p>
-                                </div>
+                                <Link to={`/articles/${article._id}`}>
+                                    <img src={article.thumbnail} className="card-img-top" alt={article.title} />
+                                    <div className="card-body">
+                                        <h5 className="card-title font-medium pb-2">
+                                            {article.title}
+                                        </h5>
+                                        <p className="card-text multiline-ellipsis">
+                                            {article.description[0]}
+                                        </p>
+                                    </div>
+                                </Link>
+
                             </div>
                         </div>
                     ))}

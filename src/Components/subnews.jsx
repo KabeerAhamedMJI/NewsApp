@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function SubNews(props) {
     const [articles, setArticles] = useState([]);
@@ -23,9 +24,11 @@ function SubNews(props) {
         <div className="d-flex flex-column flex-md-row pt-4 pb-4 pl-2 gap-4">
             {articles.map((article, index) => (
                 <article key={index}>
+                    <Link to={`/articles/${article._id}`}> 
                     <img className="img-fluid" src={article.thumbnail} alt="" />
                     <h4 className="Category">{article.category.toUpperCase()}</h4>
                     <h3 className="TitleText">{article.title}</h3>
+                    </Link>
                 </article>
             ))}
         </div>

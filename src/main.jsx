@@ -7,6 +7,9 @@ import {
 import Root from './Routes/root'
 import "./index.css";
 import Home from "./Routes/home";
+import Articles from "./Routes/articles";
+import About from "./Routes/about";
+import Article from "./Routes/article";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +20,18 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
+      {
+        path: '/articles',
+        element: <Articles />,
+      },
+      {
+        path: '/about',
+        element: <About />
+      },
+      {
+        path: '/article',
+        element: <Article />,
+      }
     ],
   },
 ]);

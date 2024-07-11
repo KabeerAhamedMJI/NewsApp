@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function LifesStyle(props) {
     const [articles, setArticles] = useState([]);
@@ -23,11 +24,13 @@ function LifesStyle(props) {
         <div id="ArtBox2" className="d-grid grid-cols-md-2 grid-cols-xl-1 gap-3">
             {articles.map((article, index) => (
                 <article key={index} className="d-flex flex-row gap-2">
+                    <Link to={`/articles/${article._id}`}> 
                     <img id="ArtImage" className="img-fluid" src={article.thumbnail} alt="" />
                     <div className='box2'>
                         <h4 className="Category">{article.category.toUpperCase()}</h4>
                         <h3 className="TitleText">{article.title}</h3>
                     </div>
+                    </Link>
                 </article>
             ))}
         </div>
@@ -35,3 +38,5 @@ function LifesStyle(props) {
 }
 
 export default LifesStyle;
+
+

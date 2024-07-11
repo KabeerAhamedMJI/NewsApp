@@ -13,19 +13,22 @@ const Root = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/category">Category</Link>
-            </li>
-            <li>
               <Link to="/about">About</Link>
             </li>
             <li>
-              <Link to="/latest-news">Latest News</Link>
+              <Link to="/articles">Articles</Link>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link to="/">Trendings</Link>
             </li>
             <li>
-              <Link to="/pages">Pages</Link>
+              <Link to="/">Contact</Link>
+            </li>
+            <li>
+              <Link to="/">Sign Up</Link>
+            </li>
+            <li>
+              <Link to="/">Login</Link>
             </li>
           </ul>
         </nav>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function TopNews(props) {
@@ -23,14 +24,17 @@ function TopNews(props) {
         <div className='main'>
             {article && (
                 <div className="article-item">
-                    <div className='second'>
-                        <h4 className="PosIcon">TOP NEWS</h4>
-                        <h3 className="Mainh3">{article.title}</h3>
-                    </div>
-                    <img className="img-fluid" src={article.thumbnail} alt={article.title} />
+                    <Link to={`/articles/${article._id}`}>
+                        <div className='second'>
+                            <h4 className="PosIcon text-xs md:text-sm lg:text-lg">TOP NEWS</h4>
+                            <h3 className="Mainh3 text-base md:text-lg lg:text-xl">{article.title}</h3>
+                        </div>
+                        <img className="img-fluid" src={article.thumbnail} alt={article.title} />
+                    </Link>
                 </div>
             )}
         </div>
+
     );
 }
 

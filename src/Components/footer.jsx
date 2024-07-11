@@ -2,20 +2,19 @@ import React from 'react';
 
 function Footer(props) {
   return (
-    <footer className=" foot text-white">
-      <div className="container mx-auto  bg-tarnsparent-600">
-       
-        <div className="flex justify-center mb-1 ">
-          <ul className="list-none">
-            <li className="mb-2"><a href="/" className="text-white">Top News</a></li>
-            <li className="mb-2"><a href="/about" className="text-white">Technology</a></li>
-            <li className="mb-2"><a href="/articles" className="text-white">Life Styles</a></li>
-            <li className="mb-2"><a href="/" className="text-white">Sports</a></li>
+    <footer className="foot text-white">
+      <div className="container mx-auto bg-transparent-600 md:py-4">
+
+        <div className="flex flex-col items-center justify-center mb-1">
+          <ul className="list-none hidden md:flex md:flex-row">
+            <li className="mb-2 md:mb-0 md:mr-4"><a href="/" className="text-white">Top News</a></li>
+            <li className="mb-2 md:mb-0 md:mr-4"><a href="/about" className="text-white">Technology</a></li>
+            <li className="mb-2 md:mb-0 md:mr-4"><a href="/articles" className="text-white">Life Styles</a></li>
+            <li className="mb-2 md:mb-0 md:mr-4"><a href="/" className="text-white">Sports</a></li>
           </ul>
         </div>
 
-     
-        <div className="flex justify-center mb-2">
+        <div className="flex justify-center mb-2 mt-2 md:px-4">
           <a href="#" className="text-white mx-2">
             <i className="fab fa-facebook-f"></i>
           </a>
@@ -29,6 +28,7 @@ function Footer(props) {
             <i className="fab fa-youtube"></i>
           </a>
         </div>
+
       </div>
 
       {/* Copyright */}

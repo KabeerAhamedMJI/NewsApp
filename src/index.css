@@ -150,7 +150,20 @@ p{
   height: 3.5em; 
   line-height: 1.8; 
 }
-
+.TitleText3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  height: 4.2em; 
+  line-height: 1.8; 
+}
+.TitleText3{
+  font-size: 13px;
+  padding: 5px 8px;
+  color: rgb(14, 14, 14); 
+}
 .TitleText2{
   display: -webkit-box;
   -webkit-box-orient: vertical;

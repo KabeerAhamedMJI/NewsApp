@@ -37,6 +37,15 @@ function ArticlePage() {
         fetchArticles();
     }, []);
 
+    const renderParagraphs = () => {
+        if (article && article.description) {
+            return article.description.split('<br><br>').map((paragraph, index) => (
+                <p key={index} className='pr-6 pl-6 pb-1 pt-4'>{paragraph}</p>
+            ));
+        }
+        return null;
+    };
+
     return (
         <div className='container mx-auto p-4 flex flex-col lg:flex-row'>
             <div className='lg:w-2/3 pr-6'>
@@ -44,7 +53,7 @@ function ArticlePage() {
                     <article className='bg-white p-2 rounded-lg shadow-md'>
                         <img className='w-full h-auto rounded' src={article.thumbnail} alt={article.title} />
                         <h2 className='text-xl sm:text-2xl md:text-2xl font-bold mt-4 pl-5 pr-5'>{article.title}</h2>
-                        <p className='text-gray-700 mt-2 pl-5 pr-5 pb-4'>{article.description}</p>
+                        {renderParagraphs()}
                     </article>
                 ) : (
                     <p>Loading...</p>
@@ -58,13 +67,10 @@ function ArticlePage() {
                 <div className='grid gap-4'>
                     {articles.map((article, index) => (
                         <Link to={`/articles/${article._id}`} key={index} className='flex flex-row gap-4 bg-white p-2 rounded-lg shadow-md'>
-
-                            <div className='d-flex flex-row'>
-                                <img className='w-1/2 h-auto rounded' src={article.thumbnail} alt={article.title} />
-                                <div className='box2 d-flex flex-col ml-2'>
-                                    <h4 className="Category">{article.category.toUpperCase()}</h4>
-                                    <h3 className='TitleText3 text-md p-2'>{article.title}</h3>
-                                </div>
+                            <img className='w-1/2 h-auto rounded' src={article.thumbnail} alt={article.title} />
+                            <div className='box2 d-flex flex-col ml-2'>
+                                <h4 className="Category">{article.category.toUpperCase()}</h4>
+                                <h3 className='TitleText3 text-md p-2'>{article.title}</h3>
                             </div>
                         </Link>
                     ))}

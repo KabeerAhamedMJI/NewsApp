@@ -10,6 +10,8 @@ import Home from "./Routes/home";
 import Articles from "./Routes/articles";
 import About from "./Routes/about";
 import Article from "./Routes/article";
+import Authors from "./Routes/authors"
+import Author, {loader as authorLoader} from "./Routes/author";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,16 @@ const router = createBrowserRouter([
       {
         path: '/articles/:ArticleId', 
         element: <Article />
+      },
+      {
+        path: '/authors/:authorId', 
+        element: <Author />,
+        loader: authorLoader
+      }
+      ,
+      {
+        path: '/authors', 
+        element: <Authors />
       }
     ],
   },

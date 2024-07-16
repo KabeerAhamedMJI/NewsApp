@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Articles() {
-    const [Tparticles, TpsetArticles] = useState([]);
-    const [Tarticles, TechsetArticles] = useState([]);
-    const [Larticles, lifeArticles] = useState([]);
-    const [Sarticles, SportArticles] = useState([]);
+    const [Tparticles, setTparticles] = useState([]);
+    const [Tarticles, setTechArticles] = useState([]);
+    const [Larticles, setLifeArticles] = useState([]);
+    const [Sarticles, setSportArticles] = useState([]);
 
     useEffect(() => {
         async function fetchArticles() {
             try {
                 const response = await axios.get('http://localhost:3000/articles?category=topNews');
                 if (response.data.length > 0) {
-                    TpsetArticles(response.data.slice(0, 6));
+                    setTparticles(response.data.slice(0, 6));
                 }
             } catch (error) {
-                console.error('Error fetching articles:', error);
+                console.error('Error fetching top news articles:', error);
             }
         }
 
@@ -27,10 +28,10 @@ function Articles() {
             try {
                 const response = await axios.get('http://localhost:3000/articles?category=technology');
                 if (response.data.length > 0) {
-                    TechsetArticles(response.data.slice(0, 6));
+                    setTechArticles(response.data.slice(0, 6));
                 }
             } catch (error) {
-                console.error('Error fetching articles:', error);
+                console.error('Error fetching technology articles:', error);
             }
         }
 
@@ -41,25 +42,26 @@ function Articles() {
         async function fetchArticles() {
             try {
                 const response = await axios.get('http://localhost:3000/articles?category=lifestyle');
-                if (response.data.length > 1) {
-                    lifeArticles(response.data.slice(1, 5));
+                if (response.data.length > 0) {
+                    setLifeArticles(response.data.slice(0, 4)); 
                 }
             } catch (error) {
-                console.error('Error fetching articles:', error);
+                console.error('Error fetching lifestyle articles:', error);
             }
         }
 
         fetchArticles();
     }, []);
+
     useEffect(() => {
         async function fetchArticles() {
             try {
                 const response = await axios.get('http://localhost:3000/articles?category=sports');
                 if (response.data.length > 0) {
-                    SportArticles(response.data.slice(0, 6));
+                    setSportArticles(response.data.slice(0, 6));
                 }
             } catch (error) {
-                console.error('Error fetching articles:', error);
+                console.error('Error fetching sports articles:', error);
             }
         }
 
@@ -69,60 +71,70 @@ function Articles() {
     return (
         <section>
             <div className="container p-4">
-                    {Tparticles.length > 0 && (
-                        <>
-                            <h2 className="heading text-sm md:text-base lg:text-lg mb-4">{Tparticles[0].category.toUpperCase()}</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                                {Tparticles.map((article, index) => (
-                                    <article key={index} className="article-item">
-                                        <img className="img-fluid w-full object-cover pb-3" src={article.thumbnail} alt={article.title} />
-                                        <h3 className="TitleText2 text-sm md:text-sm lg:text-sm">{article.title}</h3>
-                                    </article>
-                                ))}
-                            </div>
-                        </>
-                    )}
-            </div>
-            <div className="container p-4">
-                    {Tarticles.length > 0 && (
-                        <>
-                            <h2 className="heading text-sm md:text-base lg:text-lg mb-4">{Tarticles[0].category.toUpperCase()}</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                                {Tarticles.map((article, index) => (
-                                    <article key={index} className="article-item">
-                                        <img className="img-fluid w-full object-cover pb-3" src={article.thumbnail} alt={article.title} />
-                                        <h3 className="TitleText2 text-sm md:text-sm lg:text-sm">{article.title}</h3>
-                                    </article>
-                                ))}
-                            </div>
-                        </>
-                    )}
-            </div>
-            <div className="container p-4">
-                {Larticles.length > 0 && (
+                {Tparticles.length > 0 && (
                     <>
-                        <h2 className="heading text-sm md:text-base lg:text-lg mb-4">{Larticles[0].category.toUpperCase()}</h2>
+                        <h2 className="heading text-sm md:text-base lg:text-lg mb-4">{Tparticles[0].category.toUpperCase()}</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                            {Larticles.map((article, index) => (
-                                <article key={index} className="article-item">
-                                    <img className="img-fluid w-full object-cover pb-3" src={article.thumbnail} alt={article.title} />
-                                    <h3 className="TitleText2 text-sm md:text-sm lg:text-sm">{article.title}</h3>
-                                </article>
+                            {Tparticles.map((article, index) => (
+                                <Link key={index} to={`/articles/${article._id}`} className="block overflow-hidden rounded-t-lg">
+                                    <article className="article-item">
+                                        <img className="img-fluid w-full object-cover pb-3" src={article.thumbnail} alt={article.title} />
+                                        <h3 className="TitleText2 text-sm md:text-sm lg:text-sm">{article.title}</h3>
+                                    </article>
+                                </Link>
                             ))}
                         </div>
                     </>
                 )}
             </div>
             <div className="container p-4">
+                {Tarticles.length > 0 && (
+                    <>
+                        <h2 className="heading text-sm md:text-base lg:text-lg mb-4">{Tarticles[0].category.toUpperCase()}</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                            {Tarticles.map((article, index) => (
+                                <Link key={index} to={`/articles/${article._id}`} className="block overflow-hidden rounded-t-lg">
+                                    <article className="article-item">
+                                        <img className="img-fluid w-full object-cover pb-3" src={article.thumbnail} alt={article.title} />
+                                        <h3 className="TitleText2 text-sm md:text-sm lg:text-sm">{article.title}</h3>
+                                    </article>
+                                </Link>
+                            ))}
+                        </div>
+                    </>
+                )}
+            </div>
+
+            <div className="container p-4">
+                {Larticles.length > 0 && (
+                    <>
+                        <h2 className="heading text-sm md:text-base lg:text-lg mb-4">{Larticles[0].category.toUpperCase()}</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                            {Larticles.map((article, index) => (
+                                <Link key={index} to={`/articles/${article._id}`} className="block overflow-hidden rounded-t-lg">
+                                    <article className="article-item">
+                                        <img className="img-fluid w-full object-cover pb-3" src={article.thumbnail} alt={article.title} />
+                                        <h3 className="TitleText2 text-sm md:text-sm lg:text-sm">{article.title}</h3>
+                                    </article>
+                                </Link>
+                            ))}
+                        </div>
+                    </>
+                )}
+            </div>
+
+            <div className="container p-4">
                 {Sarticles.length > 0 && (
                     <>
                         <h2 className="heading text-sm md:text-base lg:text-lg mb-4">{Sarticles[0].category.toUpperCase()}</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                             {Sarticles.map((article, index) => (
-                                <article key={index} className="article-item">
-                                    <img className="img-fluid w-full object-cover pb-3" src={article.thumbnail} alt={article.title} />
-                                    <h3 className="TitleText2 text-sm md:text-sm lg:text-sm">{article.title}</h3>
-                                </article>
+                                <Link key={index} to={`/articles/${article._id}`} className="block overflow-hidden rounded-t-lg">
+                                    <article className="article-item">
+                                        <img className="img-fluid w-full object-cover pb-3" src={article.thumbnail} alt={article.title} />
+                                        <h3 className="TitleText2 text-sm md:text-sm lg:text-sm">{article.title}</h3>
+                                    </article>
+                                </Link>
                             ))}
                         </div>
                     </>

@@ -9,8 +9,8 @@ function Technology() {
         async function fetchArticles() {
             try {
                 const response = await axios.get('http://localhost:3000/articles?category=technology');
-                if (response.data.length > 1) {
-                    setArticles(response.data.slice(1, 4));
+                if (response.data && response.data.length > 0) {
+                    setArticles(response.data.slice(0, 3));
                 }
             } catch (error) {
                 console.error('Error fetching articles:', error);
@@ -25,12 +25,8 @@ function Technology() {
             <div className="container">
                 {articles.length > 0 && (
                     <div className="d-flex flex-column flex-xl-row align-items-xl-center pt-1 pb-4 pl-2 gap-2">
-                        {articles.length > 0 && (
-                            <>
-                                <h3 className="trending-box">{articles[0].category.toUpperCase()}</h3>
-                                <span className='article-title'>{articles[0].title}</span>
-                            </>
-                        )}
+                        <h3 className="trending-box">{articles[0].category.toUpperCase()}</h3>
+                        <span className='article-title'>{articles[0].title}</span>
                     </div>
                 )}
                 <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -44,11 +40,10 @@ function Technology() {
                                             {article.title}
                                         </h5>
                                         <p className="card-text multiline-ellipsis">
-                                            {article.description[0]}
+                                            {article.description}
                                         </p>
                                     </div>
                                 </Link>
-
                             </div>
                         </div>
                     ))}

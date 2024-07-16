@@ -3,7 +3,7 @@ import React from 'react';
 function Footer(props) {
   return (
     <footer className="foot text-white">
-      <div className="container mx-auto bg-transparent-600 md:py-4">
+      <div className="container items-center justify-center mx-auto bg-transparent-600 md:py-4">
 
         <div className="flex flex-col items-center justify-center mb-1">
           <ul className="list-none hidden md:flex md:flex-row">
@@ -14,7 +14,7 @@ function Footer(props) {
           </ul>
         </div>
 
-        <div className="flex justify-center mb-2 mt-2 md:px-4">
+        <div className="flex justify-center  mb-2 mt-2 md:px-4">
           <a href="#" className="text-white mx-2">
             <i className="fab fa-facebook-f"></i>
           </a>

@@ -222,11 +222,11 @@ p {
 
 .multiline-ellipsis {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: calc(1.1em * 3);
+  height: calc(1.1em * 4);
 }
 
 .box2 {

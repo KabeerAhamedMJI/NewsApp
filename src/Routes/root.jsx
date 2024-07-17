@@ -21,8 +21,8 @@ const Root = () => {
             <li><Link to="/articles">Articles</Link></li>
             <li><Link to="/authors">Authors</Link></li>
             <li><Link to="/">Contact</Link></li>
-            <li><Link to="/">Sign Up</Link></li>
-            <li><Link to="/">Login</Link></li>
+            <li><Link to="/signup">Sign Up</Link></li>
+            <li><Link to="/login">Login</Link></li>
             <li><Link to="/">Logout</Link></li>
           </ul>
         </nav>
@@ -34,8 +34,8 @@ const Root = () => {
             <li><Link to="/articles" onClick={() => setIsMenuOpen(false)}>Articles</Link></li>
             <li><Link to="/authors" onClick={() => setIsMenuOpen(false)}>Authors</Link></li>
             <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
-            <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Sign Up</Link></li>
-            <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Login</Link></li>
+            <li><Link to="/signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link></li>
+            <li><Link to="/login" onClick={() => setIsMenuOpen(false)}>Login</Link></li>
             <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Logout</Link></li>
           </ul>
         </div>

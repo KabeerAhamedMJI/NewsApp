@@ -12,6 +12,8 @@ import About from "./Routes/about";
 import Article from "./Routes/article";
 import Authors from "./Routes/authors"
 import Author, {loader as authorLoader} from "./Routes/author";
+import Signup from "./Routes/signup";
+import LoginForm from "./Components/loginForm";
 
 const router = createBrowserRouter([
   {
@@ -38,11 +40,18 @@ const router = createBrowserRouter([
         path: '/authors/:authorId', 
         element: <Author />,
         loader: authorLoader
-      }
-      ,
+      },
       {
         path: '/authors', 
         element: <Authors />
+      },
+      {
+        path: '/signup',
+       element: <Signup />
+      },
+      {
+        path: '/login',
+        element: <LoginForm />
       }
     ],
   },

@@ -11,6 +11,7 @@ function Footer(props) {
             <li className="mb-2 md:mb-0 md:mr-4"><a href="/about" className="text-white">Technology</a></li>
             <li className="mb-2 md:mb-0 md:mr-4"><a href="/articles" className="text-white">Life Styles</a></li>
             <li className="mb-2 md:mb-0 md:mr-4"><a href="/" className="text-white">Sports</a></li>
+            <li className="mb-2 md:mb-0 md:mr-4"><a href="/" className="text-white">Privacy Policy</a></li>
           </ul>
         </div>
 

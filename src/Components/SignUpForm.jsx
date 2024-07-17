@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form"
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function SignUpForm() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -12,16 +14,18 @@ export default function SignUpForm() {
 
 
   const onSubmit = (data) => {
-    axios.post(`${import.meta.env.VITE_API_BASE_URL}/users`, data)
-      .then(() => console.log(data))
-      .catch(error => console.log(error))
-
-  }
+    axios.post('http://localhost:3000/users', data)
+      .then(() => {
+        console.log(data);
+        navigate('/login');
+      })
+      .catch(error => console.log(error));
+  };
 
   return (
 
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto bg-white p-12 rounded-md">
-      <h2 className="text-2xl font-bold text-[#3778c2] pb-8">BE THE FIRST TO KNOW</h2>
+      <h2 className="text-2xl font-bold text-[#3778c2] pb-4">SIGN UP</h2>
       <div className="mb-3">
         <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name:</label>
         <input type="text" id="name" {...register("name", { required: true, maxLength: 25 })} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
@@ -48,7 +52,7 @@ export default function SignUpForm() {
       <label className='flex items-center mt-2'>
   <input type='radio' name='option' className='form-radio' required />
   <span className='ml-2 text-sm'>
-    I agree with the <a href="#" className="text-blue-500 underline">Privacy Policy</a>.
+    I agree with the <a href="#" className="text-blue-500 ">Privacy Policy</a>.
   </span>
 </label>
 
@@ -58,7 +62,7 @@ export default function SignUpForm() {
 
       </div>
       <div className="mt-4 text-center">
-        <p className="text-sm">Already have an account? <a href="/login" className="text-blue-500 underline">Login here</a>.</p>
+        <p className="text-sm">Already have an account? <a href="/login" className="text-blue-500">Login here</a>.</p>
       </div>
     </form>
 

@@ -13,7 +13,6 @@ const Root = () => {
     <>
       <header className="Header">
         <img className="img-fluid float-left" src="/Img/logo.png" alt="Logo" />
-
         <nav className="d-none d-xl-block d-xxl-block">
           <ul>
             <li><Link to="/">Home</Link></li>

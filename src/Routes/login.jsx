@@ -3,8 +3,8 @@ import LoginForm from '../Components/loginForm'
 
 function Login() {
     return (
-        <section>
-            <div>
+        <section >
+            <div >
                 <LoginForm />
             </div>
         </section>

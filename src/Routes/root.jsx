@@ -1,6 +1,18 @@
 import React, { useState } from 'react'; 
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLoaderData } from "react-router-dom";
 import Footer from '../Components/footer'; 
+
+export async function loader() {
+  let loggedIn;
+      try{
+          const response = await axios.get('http://localhost:3000/auth/verify', { withCredentials: true })
+          return { loggedIn: true }
+      }
+      catch(error){
+          return { loggedIn: false }
+      }
+         
+}
 
 const Root = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,7 +34,7 @@ const Root = () => {
             <li><Link to="/">Contact</Link></li>
             <li><Link to="/signup">Sign Up</Link></li>
             <li><Link to="/login">Login</Link></li>
-            <li><Link to="/">Logout</Link></li>
+            <li><Link to="/logout">Logout</Link></li>
           </ul>
         </nav>
 
@@ -35,7 +47,7 @@ const Root = () => {
             <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
             <li><Link to="/signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link></li>
             <li><Link to="/login" onClick={() => setIsMenuOpen(false)}>Login</Link></li>
-            <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Logout</Link></li>
+            <li><Link to="/logout" onClick={() => setIsMenuOpen(false)}>Logout</Link></li>
           </ul>
         </div>
 

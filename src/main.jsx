@@ -14,6 +14,7 @@ import Authors from "./Routes/authors"
 import Author, {loader as authorLoader} from "./Routes/author";
 import Signup from "./Routes/signup";
 import LoginForm from "./Components/loginForm";
+import Logout from "./Routes/logout";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <LoginForm />
+      },
+      {
+        path: 'logout',
+        element: <Logout />
       }
     ],
   },

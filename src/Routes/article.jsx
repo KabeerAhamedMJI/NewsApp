@@ -12,7 +12,8 @@ function Article() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); // Get the current location (path)
+  const location = useLocation();
+  const [comments, setComments] =useState([])
 
   useEffect(() => {
     async function fetchLoginStatus() {
@@ -27,12 +28,20 @@ function Article() {
     fetchLoginStatus();
   }, []);
 
+  useEffect(() => {
+    axios.get('http://localhost:3000/comments')
+    .then(response =>{
+      setComments(response.data)
+    })
+    .catch(error => console.log(error))
+  }, [])
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   const handleLoginSuccess = () => {
     setIsModalOpen(false);
-    navigate(location.pathname); // Navigate back to the current article path
+    navigate(location.pathname);
   };
 
   return (
@@ -50,7 +59,11 @@ function Article() {
             </h2>
           </div>
         )}
-        <CommentCard />
+        {
+          comments.map(comment =>{
+            return   <CommentCard comment={comment} />
+          })
+        }
       </div>
       <div className="w-full lg:w-1/3 p-2">
         <RelatedNews />

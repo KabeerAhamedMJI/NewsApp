@@ -14,6 +14,7 @@ function Authors() {
                 }
             } catch (error) {
                 console.error('Error fetching authors:', error);
+                // Optionally, you might want to set an error state or display an error message
             }
         }
 

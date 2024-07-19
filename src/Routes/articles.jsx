@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
 function Articles() {
     const [Tparticles, setTparticles] = useState([]);
     const [Tarticles, setTechArticles] = useState([]);
@@ -10,7 +9,7 @@ function Articles() {
     const [Sarticles, setSportArticles] = useState([]);
 
     useEffect(() => {
-        async function fetchArticles() {
+        async function fetchTopNewsArticles() {
             try {
                 const response = await axios.get('http://localhost:3000/articles?category=topNews');
                 if (response.data.length > 0) {
@@ -21,11 +20,11 @@ function Articles() {
             }
         }
 
-        fetchArticles();
+        fetchTopNewsArticles();
     }, []);
 
     useEffect(() => {
-        async function fetchArticles() {
+        async function fetchTechnologyArticles() {
             try {
                 const response = await axios.get('http://localhost:3000/articles?category=technology');
                 if (response.data.length > 0) {
@@ -36,11 +35,11 @@ function Articles() {
             }
         }
 
-        fetchArticles();
+        fetchTechnologyArticles();
     }, []);
 
     useEffect(() => {
-        async function fetchArticles() {
+        async function fetchLifestyleArticles() {
             try {
                 const response = await axios.get('http://localhost:3000/articles?category=lifestyle');
                 if (response.data.length > 0) {
@@ -51,11 +50,11 @@ function Articles() {
             }
         }
 
-        fetchArticles();
+        fetchLifestyleArticles();
     }, []);
 
     useEffect(() => {
-        async function fetchArticles() {
+        async function fetchSportsArticles() {
             try {
                 const response = await axios.get('http://localhost:3000/articles?category=sports');
                 if (response.data.length > 0) {
@@ -66,7 +65,7 @@ function Articles() {
             }
         }
 
-        fetchArticles();
+        fetchSportsArticles();
     }, []);
 
     return (

@@ -13,7 +13,7 @@ function Article() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const [comments, setComments] =useState([])
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     async function fetchLoginStatus() {
@@ -29,12 +29,17 @@ function Article() {
   }, []);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/comments')
-    .then(response =>{
-      setComments(response.data)
-    })
-    .catch(error => console.log(error))
-  }, [])
+    async function fetchComments() {
+      try {
+        const response = await axios.get('http://localhost:3000/comments');
+        setComments(response.data);
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      }
+    }
+
+    fetchComments();
+  }, []);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -60,9 +65,9 @@ function Article() {
           </div>
         )}
         {
-          comments.map(comment =>{
-            return   <CommentCard comment={comment} />
-          })
+          comments.map(comment => (
+            <CommentCard key={comment._id} comment={comment} />
+          ))
         }
       </div>
       <div className="w-full lg:w-1/3 p-2">

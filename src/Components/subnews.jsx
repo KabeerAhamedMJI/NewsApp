@@ -25,9 +25,9 @@ function SubNews(props) {
             {articles.map((article, index) => (
                 <article key={index}>
                     <Link to={`/articles/${article._id}`}> 
-                    <img className="img-fluid" src={article.thumbnail} alt="" />
-                    <h4 className="Category">{article.category.toUpperCase()}</h4>
-                    <h3 className="TitleText">{article.title}</h3>
+                        <img className="img-fluid" src={article.thumbnail} alt="" />
+                        <h4 className="Category">{article.category.toUpperCase()}</h4>
+                        <h3 className="TitleText">{article.title}</h3>
                     </Link>
                 </article>
             ))}

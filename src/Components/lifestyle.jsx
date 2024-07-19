@@ -38,6 +38,3 @@ function LifeStyle(props) {
 }
 
 export default LifeStyle;
-{/* <Link to={`/articles/${article._id}`} key={index} className="d-flex flex-row gap-2">
-
-</Link> */}

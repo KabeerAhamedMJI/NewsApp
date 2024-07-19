@@ -9,15 +9,16 @@ function LoginForm({ onLoginSuccess }) {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => { 
-        axios.post('http://localhost:3000/auth/login', data, { withCredentials: true })
-            .then(response => {
-                console.log(response);
-                if (onLoginSuccess) {
-                    onLoginSuccess(); 
-                }
-            })
-            .catch(error => console.log(error));
+    const onSubmit = async (data) => { 
+        try {
+            const response = await axios.post('http://localhost:3000/auth/login', data, { withCredentials: true });
+            console.log(response);
+            if (onLoginSuccess) {
+                onLoginSuccess(); 
+            }
+        } catch (error) {
+            console.error('Error logging in:', error);
+        }
     };
 
     return (

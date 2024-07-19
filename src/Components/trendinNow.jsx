@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function TrendingNow(props) {
     const [article, setArticle] = useState(null); 
+
     useEffect(() => {
         async function TrendingArticle() {
             try {

@@ -50,7 +50,7 @@ const Root = () => {
         <nav className="d-none d-xl-block d-xxl-block">
           <ul>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
+            <li><Link to="/">About</Link></li>
             <li><Link to="/articles">Articles</Link></li>
             <li><Link to="/authors">Authors</Link></li>
             <li><Link to="/">Contact</Link></li>
@@ -66,7 +66,7 @@ const Root = () => {
         <div className={`sub-menu-wrap ${isMenuOpen ? 'open' : ''}`}>
           <ul className="sub d-block d-xl-none">
             <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
-            <li><Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link></li>
+            <li><Link to="/" onClick={() => setIsMenuOpen(false)}>About</Link></li>
             <li><Link to="/articles" onClick={() => setIsMenuOpen(false)}>Articles</Link></li>
             <li><Link to="/authors" onClick={() => setIsMenuOpen(false)}>Authors</Link></li>
             <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>

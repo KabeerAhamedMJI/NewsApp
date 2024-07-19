@@ -1,19 +1,25 @@
-import React from 'react'
+import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 
 export async function loader({ params }) {
-    const response = await axios.get(`http://localhost:3000/authors/${params.authorId}`);
-    const author = response.data;
-    return { author };
+    try {
+        const response = await axios.get(`http://localhost:3000/authors/${params.authorId}`);
+        const author = response.data;
+        return { author };
+    } catch (error) {
+        console.error('Error fetching author data:', error);
+        // Optionally, you might want to handle the error by returning a fallback or error state
+        return { author: {} }; // Or handle this case in the component
+    }
 }
 
 function Author(props) {
     const { author } = useLoaderData();
 
-    const paragraphs = author.description.split('<br><br>').map((paragraph, index) => (
+    const paragraphs = author.description?.split('<br><br>').map((paragraph, index) => (
         <p key={index} className='pb-4'>{paragraph}</p>
-    ));
+    )) || [];
 
     return (
         <section>

@@ -34,7 +34,6 @@ function TopNews(props) {
                 </div>
             )}
         </div>
-
     );
 }
 

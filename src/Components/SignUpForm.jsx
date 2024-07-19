@@ -24,7 +24,7 @@ export default function SignUpForm() {
 
   return (
 
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto bg-white p-12 rounded-md">
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto mt-20 bg-white p-8 rounded-md">
       <h2 className="text-2xl font-bold text-[#3778c2] pb-4">SIGN UP</h2>
       <div className="mb-3">
         <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name:</label>

@@ -7,7 +7,7 @@ function Logout(props){
     useEffect(() => {
         axios.get('http://localhost:3000/auth/logout', {withCredentials: true})
         .then(res => {
-            navigate("/login");
+            navigate("/");
         })
         .catch(error => {
             console.log(error)

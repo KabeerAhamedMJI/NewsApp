@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function ArticlePage() {
     const [article, setArticle] = useState(null);
-    const [articles, setArticles] = useState([]);
     const { ArticleId } = useParams();
 
     useEffect(() => {
@@ -22,20 +21,6 @@ function ArticlePage() {
         fetchArticle();
     }, [ArticleId]);
 
-    useEffect(() => {
-        async function fetchArticles() {
-            try {
-                const response = await axios.get('http://localhost:3000/articles?category=lifestyle');
-                if (response.data.length > 1) {
-                    setArticles(response.data.slice(1, 9));
-                }
-            } catch (error) {
-                console.error('Error fetching articles:', error);
-            }
-        }
-
-        fetchArticles();
-    }, []);
 
     const renderParagraphs = () => {
         if (article && article.description) {
@@ -47,8 +32,8 @@ function ArticlePage() {
     };
 
     return (
-        <div className='container mx-auto p-4 flex flex-col lg:flex-row'>
-            <div className='lg:w-2/3 pr-6'>
+        <div className='mx-auto flex flex-col lg:flex-row'>
+            <div>
                 {article ? (
                     <article className='bg-white p-2 rounded-lg shadow-md'>
                         <img className='w-full h-auto rounded' src={article.thumbnail} alt={article.title} />
@@ -60,20 +45,6 @@ function ArticlePage() {
                 )}
                 <div className='p-3 mt-2 bg-white rounded-lg shadow-md'>
                     <p className='text-xs text-slate-500'>The comments posted here are not those of News Today. Comments are solely the responsibility of the author. According to the IT policy of the Central Government, making insults and obscene language against individual, community, religion and country is a punishable offence. Legal action will be taken against such comments.</p>
-                </div>
-            </div>
-            <div className='lg:w-1/3'>
-                <h3 className='text-xl font-semibold mb-4 mt-3'>Related News</h3>
-                <div className='grid gap-4'>
-                    {articles.map((article, index) => (
-                        <Link to={`/articles/${article._id}`} key={index} className='flex flex-row gap-4 bg-white p-2 rounded-lg shadow-md'>
-                            <img className='w-1/2 h-auto rounded' src={article.thumbnail} alt={article.title} />
-                            <div className='box2 d-flex flex-col ml-2'>
-                                <h4 className="Category">{article.category.toUpperCase()}</h4>
-                                <h3 className='TitleText3 text-md p-2'>{article.title}</h3>
-                            </div>
-                        </Link>
-                    ))}
                 </div>
             </div>
         </div>

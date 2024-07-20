@@ -8,12 +8,13 @@ import RelatedNews from '../Components/relatedNews';
 import Modal from '../Components/modal';
 import LoginForm from '../Components/loginForm';
 
-function Article() {
+function Article(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([])
+
 
   useEffect(() => {
     async function fetchLoginStatus() {
@@ -29,16 +30,11 @@ function Article() {
   }, []);
 
   useEffect(() => {
-    async function fetchComments() {
-      try {
-        const response = await axios.get('http://localhost:3000/comments');
-        setComments(response.data);
-      } catch (error) {
-        console.error('Error fetching comments:', error);
-      }
-    }
-
-    fetchComments();
+    axios.get('http://localhost:3000/comments')
+    .then(response =>{
+      setComments(response.data)
+    })
+    .catch(error => console.log(error))
   }, []);
 
   const openModal = () => setIsModalOpen(true);
@@ -64,6 +60,7 @@ function Article() {
             </h2>
           </div>
         )}
+        <h2 className="text-2xl font-bold text-[#3778c2] pl-4">Comments</h2>
         {
           comments.map(comment => (
             <CommentCard key={comment._id} comment={comment} />

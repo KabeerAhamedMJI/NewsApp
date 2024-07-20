@@ -1,30 +1,31 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { changeLoginStatus } from "../app/feature/login/loginSlice";
 
 function Logout(props) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         async function handleLogout() {
             try {
                 await axios.get('http://localhost:3000/auth/logout', { withCredentials: true });
+                dispatch(changeLoginStatus(false))
                 navigate("/");
             } catch (error) {
-                console.log('Error logging out:', error);
+                dispatch(changeLoginStatus(true))
             }
         }
 
         handleLogout();
     }, [navigate]);
-
     return (
         <>
-            <main className="container m-auto">
-                <div className="flex flex-col items-center justify-center h-full mt-52">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">Logging Out...........</h1>
-                </div>
-            </main>
+<div>
+    <h1>Logging Out...........</h1>
+</div>
         </>
     );
 }

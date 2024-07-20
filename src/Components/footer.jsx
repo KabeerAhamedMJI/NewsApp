@@ -30,7 +30,7 @@ function Footer(props) {
           </div>
         </div>
         {/* Copyright */}
-        <div className="text-center py-2 bg-gray-800">
+        <div className="text-center py-2 bg-gray-800 mb--8">
           <div className="container mx-auto text-white">
             &copy; 2024 NewsToday.com. All rights reserved.
           </div>

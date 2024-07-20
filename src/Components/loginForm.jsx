@@ -1,23 +1,26 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { changeLoginStatus } from '../app/feature/login/loginSlice';
 
 function LoginForm({ onLoginSuccess }) {
+    const dispatch = useDispatch()
     const {
-        register, 
-        handleSubmit, 
+        register,
+        handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onSubmit = async (data) => { 
+    const onSubmit = async (data) => {
         try {
-            const response = await axios.post('http://localhost:3000/auth/login', data, { withCredentials: true });
-            console.log(response);
+            await axios.post('http://localhost:3000/auth/login', data, { withCredentials: true });
+            dispatch(changeLoginStatus(true))
             if (onLoginSuccess) {
-                onLoginSuccess(); 
+                onLoginSuccess();
             }
         } catch (error) {
-            console.error('Error logging in:', error);
+            dispatch(changeLoginStatus(false)) 
         }
     };
 
@@ -31,7 +34,7 @@ function LoginForm({ onLoginSuccess }) {
                         type="email"
                         id="email"
                         className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        {...register("email", { 
+                        {...register("email", {
                             required: true,
                             pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                         })}

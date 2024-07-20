@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet } from "react-router-dom";
 import Footer from '../Components/footer';
-import axios from 'axios';  
+import axios from 'axios';
 import Modal from '../Components/modal';
-import LoginForm from '../Components/loginForm'; 
+import LoginForm from '../Components/loginForm';
 import SignUpForm from '../Components/SignUpForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeLoginStatus } from '../app/feature/login/loginSlice';
 
 const Root = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const loggedIn = useSelector(state => state.login.loggedIn)
+  const dispatch = useDispatch();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
@@ -19,20 +22,20 @@ const Root = () => {
   useEffect(() => {
     async function fetchLoginStatus() {
       try {
-        const response = await axios.get('http://localhost:3000/auth/verify', { withCredentials: true });
-        setLoggedIn(response.data.verified);
+         await axios.get('http://localhost:3000/auth/verify', { withCredentials: true });
+        dispatch(changeLoginStatus(true))
       } catch (error) {
-        console.error('Error verifying login status:', error);
+        dispatch(changeLoginStatus(false))
       }
     }
 
     fetchLoginStatus();
-  }, []); 
+  }, [dispatch]);
 
-  const openLoginModal = () => setIsLoginModalOpen(true); 
+  const openLoginModal = () => setIsLoginModalOpen(true);
   const closeLoginModal = () => setIsLoginModalOpen(false);
 
-  const openSignUpModal = () => setIsSignUpModalOpen(true); 
+  const openSignUpModal = () => setIsSignUpModalOpen(true);
   const closeSignUpModal = () => setIsSignUpModalOpen(false);
 
   const handleLoginSuccess = () => {
@@ -70,11 +73,11 @@ const Root = () => {
             <li><Link to="/articles" onClick={() => setIsMenuOpen(false)}>Articles</Link></li>
             <li><Link to="/authors" onClick={() => setIsMenuOpen(false)}>Authors</Link></li>
             <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
-            <li><button onClick={openSignUpModal} style={{ color: '#2e69ac' }}>Sign Up</button></li>
+            <li><button onClick={() => { openSignUpModal(); setIsMenuOpen(false); }} style={{ color: '#2e69ac' }}>Sign Up</button></li>
             {loggedIn ? (
               <li><Link to="/logout" onClick={() => setIsMenuOpen(false)}>Logout</Link></li>
             ) : (
-              <li><button onClick={openLoginModal} style={{ color: '#2e69ac' }}>Login</button></li>
+              <li><button onClick={() => { openLoginModal(); setIsMenuOpen(false); }} style={{ color: '#2e69ac' }}>Login</button></li>
             )}
           </ul>
         </div>
@@ -94,7 +97,7 @@ const Root = () => {
       <Modal isOpen={isLoginModalOpen} onClose={closeLoginModal}>
         <LoginForm onLoginSuccess={handleLoginSuccess} />
       </Modal>
-      
+
       <Modal isOpen={isSignUpModalOpen} onClose={closeSignUpModal}>
         <SignUpForm onSignUpSuccess={handleSignUpSuccess} />
       </Modal>

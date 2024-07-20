@@ -9,16 +9,15 @@ export default function CommentForm(props) {
   } = useForm();
 
   const onSubmit = async (data) => {
+    console.log(data)
     try {
       const payload = {
         ...data,
         article: props.articleId,
         user: props.userName,
       };
-      const response = await axios.post('http://localhost:3000/comments', payload, { withCredentials: true });
+      const response = await axios.post(`http://localhost:3000/Comments`, payload, { withCredentials: true });
       console.log(response.data);
-      // Assuming you have a dispatch function in scope
-      dispatch(PostNewComment(response.data));
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
